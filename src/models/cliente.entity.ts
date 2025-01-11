@@ -1,7 +1,5 @@
-import internal from "stream";
-import { Endereco } from "./endereco.entity";
 import { Animal } from "./animal.entity";
-import { Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 export class Cliente {
@@ -21,10 +19,28 @@ export class Cliente {
     @Column()
     telefone: string
     
-    @OneToOne( () => Endereco, endereco => endereco.cliente )
-    endereco: Endereco
+    @Column()
+    logradouro: string
+    
+    @Column()
+    complemento: string
+    
+    @Column()
+    cidade: string
+    
+    @Column()
+    estado: string
+    
+    @Column()
+    cep: string
     
     @OneToMany(() => Animal, animal => animal.cliente)
     animais: Animal[]
+
+    @CreateDateColumn()
+    dataCadastro: Date
+
+    @UpdateDateColumn()
+    dataAtualizacao: Date
 
 }
